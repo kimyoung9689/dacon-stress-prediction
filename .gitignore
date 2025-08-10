@@ -1,0 +1,15 @@
+# 데이터 파일 제외
+*.csv
+*.xlsx
+*.zip
+
+# 모델 파일 및 캐시 파일 제외
+*.cbm
+*.pkl
+__pycache__/
+
+# 캣부스트 정보 파일 제외
+catboost_info/
+
+# 기타 불필요한 파일 제외
+.ipynb_checkpoints/
