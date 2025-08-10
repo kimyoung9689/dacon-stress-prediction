@@ -21,14 +21,10 @@ def handle_missing_values(df):
     if df is None:
         return None
     
-    # 1. 'medical_history', 'family_medical_history' 결측치 처리
     df['medical_history'] = df['medical_history'].fillna('unknown')
     df['family_medical_history'] = df['family_medical_history'].fillna('unknown')
-    
-    # 2. 'edu_level' 결측치 처리
     df['edu_level'] = df['edu_level'].fillna('unknown')
     
-    # 3. 'mean_working' 결측치 처리
     grouped_median = df.groupby(['smoke_status', 'edu_level'])['mean_working'].transform('median')
     df['mean_working'] = df['mean_working'].fillna(grouped_median)
     
@@ -50,32 +46,21 @@ def handle_outliers(df, column='bone_density'):
     
     return df
 
+def one_hot_encode(df):
+    """
+    범주형 변수를 원-핫 인코딩하는 함수.
+    """
+    if df is None:
+        return None
+    
+    categorical_cols = ['gender', 'activity', 'smoke_status', 'sleep_pattern',
+                        'medical_history', 'family_medical_history', 'edu_level']
+    
+    df = pd.get_dummies(df, columns=categorical_cols, drop_first=True)
+    
+    return df
+
 if __name__ == '__main__':
     # 예시: 이 파일 자체를 실행했을 때 동작하는 코드
-    # 실제로는 main.py에서 이 함수들을 호출하게 됩니다.
-    
-    # 데이터 불러오기
-    # 주의: 이 파일은 src 폴더에 있으므로, data 폴더는 한 단계 상위 디렉터리에 있습니다.
-    train_file_path = '../data/train.csv'
-    test_file_path = '../data/test.csv'
-    
-    train_df_raw = load_data(train_file_path)
-    test_df_raw = load_data(test_file_path)
-
-    if train_df_raw is not None and test_df_raw is not None:
-        # 결측치 처리
-        train_df_processed = handle_missing_values(train_df_raw.copy())
-        test_df_processed = handle_missing_values(test_df_raw.copy())
-
-        # 이상치 처리
-        train_df_processed = handle_outliers(train_df_processed)
-        test_df_processed = handle_outliers(test_df_processed)
-
-        print("전처리 완료! 처리된 데이터의 결측치 확인:")
-        print("Train data missing values after preprocessing:")
-        print(train_df_processed.isnull().sum())
-        
-        print("\nTest data missing values after preprocessing:")
-        print(test_df_processed.isnull().sum())
-    else:
-        print("데이터 로드에 실패하여 전처리 단계를 건너뜁니다.")
+    print("이 코드는 main.py에서 호출되도록 설계되었습니다.")
+    print("개별 함수를 테스트하려면 여기에서 실행할 수 있습니다.")
