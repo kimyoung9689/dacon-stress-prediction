@@ -15,7 +15,12 @@
 
 #### 2.1 데이터 개요 및 결측치 현황
 * **데이터셋 크기**: `train`과 `test` 데이터 모두 3,000개의 샘플로 구성.
-* **결측치**: `medical_history`(43%), `family_medical_history`(50%), `edu_level`(20%), `mean_working`(35%) 컬럼에서 높은 비율의 결측치를 확인.
+* **결측치**: 
+  * `medical_history`(43%), 
+  * `family_medical_history`(50%), 
+  * `edu_level`(20%), 
+  * `mean_working`(35%) 
+  * 컬럼에서 높은 비율의 결측치를 확인.
 * **이상치**: bone_density 컬럼에서 음수 값이 발견되어 이상치로 판단.
 * **결측치 패턴**: `medical_history`와 `family_medical_history` 결측치가 높은 상관관계를 보였으며, 이는 결측치 자체가 의미있는 정보가 될 수 있음을 시사.
 
@@ -25,6 +30,7 @@
 family_medical_history 결측 그룹은 weight, systolic_blood_pressure의 분포가 다른 그룹과 상이했음.
 
 mean_working 결측 그룹은 cholesterol 수치가 더 낮은 경향을 보였음.
+
 이러한 분석을 통해 결측치 자체에 정보가 담겨 있을 수 있다는 인사이트를 얻었고, 이를 바탕으로 'unknown' 카테고리를 활용하는 전처리 전략을 수립했습니다.
 
 #### 2.2 전처리 및 이상치 처리 전략
@@ -111,11 +117,11 @@ Permutation Importance 분석을 통해 변수 중요도를 측정. 이를 기�
 ### 5. 기술 스택
 * **언어**: Python(3.13.5)
 * **주요 라이브러리**: 
-pandas==2.2.3
-numpy==2.1.3
-scikit-learn==1.6.1
-xgboost==3.0.3
-lightgbm==4.6.0
+  * pandas==2.2.3
+  * numpy==2.1.3
+  * scikit-learn==1.6.1
+  * xgboost==3.0.3
+  * lightgbm==4.6.0
 * **환경**: Jupyter Notebook, Visual Studio Code
 
 ---
